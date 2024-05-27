@@ -1,0 +1,42 @@
+.centered-title {
+  text-align: center;
+  width: 100%;
+}
+
+.welcome-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.additional-info {
+  padding: 0 20px;
+}
+
+.additional-info h2 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.footer-title {
+  text-align: center;
+  width: 100%;
+}
+
+ion-item {
+  margin-top: 20px;
+}
+
+ion-input {
+  width: 80%;
+}
+
+ion-button {
+  padding: 5px;
+}
+
+ion-modal {
+  --width: 90%;
+  --height: 40%;
+}
