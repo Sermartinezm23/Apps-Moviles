@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title class="centered-title">Skeleton APP</ion-title>
+    <ion-title class="titulo">Skeleton APP</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,12 +11,12 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="welcome-container">
+  <div class="bienvenido">
     <h1>Bienvenido!</h1>
     <p>Usuario: {{ username }}</p>
   </div>
 
-  <div class="additional-info">
+  <div class="informacion-adicional">
     <h2>Información Adicional</h2>
 
     <form [formGroup]="form">
@@ -33,10 +33,10 @@
       <ion-item>
         <ion-label position="floating">Nivel Educación</ion-label>
         <ion-select placeholder="Seleccione Nivel" formControlName="nivelEducacion">
-          <ion-select-option value="basica">Basica</ion-select-option>
-          <ion-select-option value="media">Media</ion-select-option>
-          <ion-select-option value="tecnica">Tecnica</ion-select-option>
-          <ion-select-option value="universitaria">Universitaria</ion-select-option>
+          <ion-select-option value="Basica">Basica</ion-select-option>
+          <ion-select-option value="Media">Media</ion-select-option>
+          <ion-select-option value="Tecnica">Tecnica</ion-select-option>
+          <ion-select-option value="Universitaria">Universitaria</ion-select-option>
         </ion-select>
       </ion-item>
 
@@ -49,7 +49,7 @@
       <ion-modal [isOpen]="showDatePicker">
         <ng-template>
           <ion-content>
-            <ion-datetime display-format="DD/MM/YYYY" [(ngModel)]="selectedDate" (ionChange)="onDateChange($event)"></ion-datetime>
+            <ion-datetime display-format="DD/MM/AAAA" [(ngModel)]="selectedDate" (ionChange)="onDateChange($event)"></ion-datetime>
             <ion-button expand="full" (click)="closeDatePicker()">Cerrar</ion-button>
           </ion-content>
         </ng-template>
@@ -57,12 +57,12 @@
     </form>
 
     <ion-button expand="block" color="medium" (click)="limpiarCampos()">Limpiar</ion-button>
-    <ion-button expand="block" color="primary">Mostrar</ion-button>
+    <ion-button expand="block" color="primary" (click)="mostrarDatos()">Mostrar</ion-button>
   </div>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-title size="small" class="footer-title">App desarrollada por Sergio Martinez</ion-title>
+    <ion-title size="small" class="pie-pagina">App desarrollada por Sergio Martinez</ion-title>
   </ion-toolbar>
 </ion-footer>

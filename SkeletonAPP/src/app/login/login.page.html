@@ -1,11 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title class="centered-title">Skeleton APP</ion-title>
+    <ion-title class="titulo">Skeleton APP</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="false">
-  <div class="welcome-container">
+  <div class="bienvenido">
     <h4>Aquí comienza todo</h4>
     <h3>Bienvenido!</h3>
   </div>
@@ -16,10 +16,10 @@
       <ion-input type="text" formControlName="username" placeholder="Usuario"></ion-input>
     </ion-item>
     <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
-      <p *ngIf="loginForm.get('username')?.errors?.['required']">El campo es obligatorio.</p>
-      <p *ngIf="loginForm.get('username')?.errors?.['pattern']">Debe ser alfanumérico.</p>
-      <p *ngIf="loginForm.get('username')?.errors?.['minlength']">Debe tener al menos 3 caracteres.</p>
-      <p *ngIf="loginForm.get('username')?.errors?.['maxlength']">No puede tener más de 8 caracteres.</p>
+      <p *ngIf="loginForm.get('username')?.errors?.['required']">El campo es obligatorio</p>
+      <p *ngIf="loginForm.get('username')?.errors?.['pattern']">Debe ser alfanumerico</p>
+      <p *ngIf="loginForm.get('username')?.errors?.['minlength']">Debe tener al menos 3 caracteres</p>
+      <p *ngIf="loginForm.get('username')?.errors?.['maxlength']">No puede tener más de 8 caracteres</p>
     </div>
     
     <ion-item>
@@ -27,15 +27,15 @@
       <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
     </ion-item>
     <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
-      <p *ngIf="loginForm.get('password')?.errors?.['required']">El campo es obligatorio.</p>
-      <p *ngIf="loginForm.get('password')?.errors?.['pattern']">Debe ser un número de 4 dígitos.</p>
+      <p *ngIf="loginForm.get('password')?.errors?.['required']">El campo es obligatorio</p>
+      <p *ngIf="loginForm.get('password')?.errors?.['pattern']">Debe ser un numero de 4 digitos</p>
     </div>
     
     <ion-button expand="block" type="submit" [disabled]="loginForm.invalid">Ingresar</ion-button>
   </form>
 
-  <div class="create-account">
-    <a href="/register">Crea tu cuenta gratis</a>
+  <div class="crear-cuenta">
+    <a href="/login">Crea tu cuenta gratis</a>
   </div>
 </ion-content>
 
