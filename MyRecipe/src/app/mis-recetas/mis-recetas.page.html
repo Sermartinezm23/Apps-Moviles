@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>MyRecipe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">MyRecipe</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="recipe-container">
+    <h2>Mis Recetas:</h2>
+
+    <div class="recipe" *ngFor="let recipe of recipes; let i = index">
+      <div class="recipe-header">
+        <h3>{{ recipe.name }}</h3>
+        <ion-button fill="clear" size="small" (click)="deleteRecipe(i)">
+          <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+        </ion-button>
+      </div>
+      <ul>
+        <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+      </ul>
+    </div>
+  </div>
+</ion-content>

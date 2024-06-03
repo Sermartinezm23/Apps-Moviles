@@ -1,0 +1,51 @@
+.recipe-container {
+  padding: 16px;
+  animation: fadeIn 1s ease-in-out;
+
+  h2 {
+    font-size: 1.5em;
+    margin-bottom: 16px;
+    animation: fadeIn 1s ease-in-out;
+  }
+}
+
+.create-recipe-container {
+  padding: 16px;
+  animation: fadeIn 1s ease-in-out;
+
+  ion-item {
+    margin-bottom: 16px;
+    animation: slideIn 1s ease-in-out;
+  }
+
+  .ingredients-container {
+    max-height: 60vh;
+    overflow-y: auto;
+    animation: slideIn 1s ease-in-out;
+  }
+
+  ion-button {
+    margin-top: 24px;
+    animation: slideIn 1s ease-in-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

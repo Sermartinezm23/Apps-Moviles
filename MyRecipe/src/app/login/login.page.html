@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="titulo">MyRecipe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="false">
+  <div class="bienvenido">
+    <h4>Todas tus recetas en un solo lugar</h4>
+    <h3>Bienvenido/a!</h3>
+  </div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input type="text" formControlName="username" placeholder="Usuario"></ion-input>
+    </ion-item>
+    <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid">
+      <p *ngIf="loginForm.get('username')?.errors?.['required']">El campo es obligatorio</p>
+      <p *ngIf="loginForm.get('username')?.errors?.['pattern']">Debe ser alfanumerico</p>
+      <p *ngIf="loginForm.get('username')?.errors?.['minlength']">Debe tener al menos 3 caracteres</p>
+      <p *ngIf="loginForm.get('username')?.errors?.['maxlength']">No puede tener más de 8 caracteres</p>
+    </div>
+    
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+    </ion-item>
+    <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+      <p *ngIf="loginForm.get('password')?.errors?.['required']">El campo es obligatorio</p>
+      <p *ngIf="loginForm.get('password')?.errors?.['pattern']">Debe ser un numero de 4 digitos</p>
+    </div>
+    
+    <ion-button expand="block" type="submit" [disabled]="loginForm.invalid">Ingresar</ion-button>
+  </form>
+
+  <div class="crear-cuenta">
+    <a href="/login">Crea tu cuenta gratis</a>
+  </div>
+</ion-content>
