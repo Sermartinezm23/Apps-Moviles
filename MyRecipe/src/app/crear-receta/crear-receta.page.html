@@ -11,11 +11,11 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="recipe-container">
+  <div class="title">
     <h2>Crear Receta:</h2>
   </div>
 
-  <div class="create-recipe-container">
+  <div class="create-recipe">
     <ion-item class="fadeIn">
       <ion-label position="floating">Nombre de la receta:</ion-label>
       <ion-input [(ngModel)]="recipeName"></ion-input>
@@ -25,7 +25,7 @@
       <ion-label position="stacked">Ingredientes:</ion-label>
     </ion-item>
 
-    <div class="ingredients-container slideIn">
+    <div class="ingredients slideIn">
       <ion-item *ngFor="let ingredient of ingredients; let i = index; trackBy: trackByIndex">
         <ion-input placeholder="Ingrediente {{i + 1}}" [(ngModel)]="ingredients[i]"></ion-input>
       </ion-item>

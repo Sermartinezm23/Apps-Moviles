@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
         this.navCtrl.navigateForward('/tabs/mis-recetas');
       }
     } else {
-      console.log('Formulario no válido');
+      console.log('Invalid form');
     }
   }
 

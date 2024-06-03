@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { MyServicioService } from '../myservicio.service';
 
 @Component({
   selector: 'app-crear-receta',
@@ -10,19 +11,15 @@ export class CrearRecetaPage {
   recipeName: string = '';
   ingredients: string[] = new Array(15).fill('');
 
-  constructor(private navCtrl: NavController) {}
+  constructor(private navCtrl: NavController, private myServicio: MyServicioService) {}
 
-  createRecipe() {
-    let recipes = JSON.parse(localStorage.getItem('recipes') || '[]');
-
+  async createRecipe() {
     const newRecipe = {
       name: this.recipeName,
       ingredients: this.ingredients.filter(ingredient => ingredient.trim() !== '')
     };
 
-    recipes.push(newRecipe);
-
-    localStorage.setItem('recipes', JSON.stringify(recipes));
+    await this.myServicio.addrecipe(newRecipe);
 
     this.recipeName = '';
     this.ingredients = new Array(15).fill('');

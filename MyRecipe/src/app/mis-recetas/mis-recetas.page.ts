@@ -1,26 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MyServicioService } from '../myservicio.service';
 
 @Component({
   selector: 'app-mis-recetas',
   templateUrl: './mis-recetas.page.html',
   styleUrls: ['./mis-recetas.page.scss'],
 })
-export class MisRecetasPage {
+export class MisRecetasPage implements OnInit {
   recipes: any[] = [];
 
-  constructor() {}
+  constructor(private myServicio: MyServicioService) {}
 
-  ionViewWillEnter() {
-    this.loadRecipes();
+  async ngOnInit() {
+    await this.loadRecipes();
   }
 
-  loadRecipes() {
-    this.recipes = JSON.parse(localStorage.getItem('recipes') || '[]');
+  async ionViewWillEnter() {
+    await this.loadRecipes();
   }
 
-  deleteRecipe(index: number) {
+  async loadRecipes() {
+    this.recipes = await this.myServicio.getrecipe();
+  }
+
+  async deleteRecipe(index: number) {
     this.recipes.splice(index, 1);
-
-    localStorage.setItem('recipes', JSON.stringify(this.recipes));
+    await this.myServicio.saverecipe(this.recipes);
   }
 }

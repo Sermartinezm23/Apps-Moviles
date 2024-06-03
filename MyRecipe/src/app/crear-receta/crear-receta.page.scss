@@ -1,4 +1,4 @@
-.recipe-container {
+.title {
   padding: 16px;
   animation: fadeIn 1s ease-in-out;
 
@@ -9,7 +9,7 @@
   }
 }
 
-.create-recipe-container {
+.create-recipe {
   padding: 16px;
   animation: fadeIn 1s ease-in-out;
 
@@ -18,7 +18,7 @@
     animation: slideIn 1s ease-in-out;
   }
 
-  .ingredients-container {
+  .ingredients {
     max-height: 60vh;
     overflow-y: auto;
     animation: slideIn 1s ease-in-out;
