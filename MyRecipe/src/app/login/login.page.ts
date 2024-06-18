@@ -26,7 +26,8 @@ export class LoginPage {
     const { username, password } = this.loginForm.value;
     const user = await this.myServicio.getUser(username, password);
     if (user) {
-      this.router.navigate(['/home']);
+      await this.myServicio.setLoggedInUser(username, password);
+      this.router.navigate(['/tabs/mis-recetas']);
     } else {
       console.log('Usuario o contraseña incorrectos');
     }

@@ -15,9 +15,20 @@
     <ion-avatar>
       <img src="assets/R.png" alt="Foto de perfil">
     </ion-avatar>
-    <h1>Perfil de {{ username }}</h1>
-    <p><strong>Nombre:</strong> Sergio</p>
-    <p><strong>Apellido:</strong> Martinez</p>
-    <ion-button expand="full">Editar Perfil</ion-button>
+    <h1>Perfil de {{ user.username }}</h1>
+    <p><strong>Nombre:</strong> <span *ngIf="!isEditing">{{ user.firstName }}</span>
+      <ion-input *ngIf="isEditing" [(ngModel)]="user.firstName"></ion-input>
+    </p>
+    <p><strong>Apellido:</strong> <span *ngIf="!isEditing">{{ user.lastName }}</span>
+      <ion-input *ngIf="isEditing" [(ngModel)]="user.lastName"></ion-input>
+    </p>
+    <p><strong>Fecha de Nacimiento:</strong> <span *ngIf="!isEditing">{{ user.birthDate }}</span>
+      <ion-input *ngIf="isEditing" [(ngModel)]="user.birthDate"></ion-input>
+    </p>
+    <ion-button expand="full" (click)="toggleEdit()">
+      {{ isEditing ? 'Cancelar' : 'Editar Perfil' }}
+    </ion-button>
+    <ion-button *ngIf="isEditing" expand="full" (click)="saveChanges()">Guardar Cambios</ion-button>
+    <ion-button expand="full" (click)="logout()">Cerrar Sesión</ion-button>
   </div>
 </ion-content>

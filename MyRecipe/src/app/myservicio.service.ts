@@ -1,13 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { User } from './models/user.model';
+
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  username: string;
+  password: string;
+}
+
+interface Recipe {
+  id: number;
+  userId: number;
+  name: string;
+  ingredients: string[];
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class MyServicioService {
   private _storage: Storage | null = null;
-  private usersKey: string = 'users';
+  private userKey: string = 'users';
+  private recipeKey: string = 'recipes';
 
   constructor(private storage: Storage) {
     this.init();
@@ -19,28 +35,70 @@ export class MyServicioService {
   }
 
   async addUser(user: Omit<User, 'id'>) {
-    const users: User[] = await this._storage?.get(this.usersKey) || [];
-    const newUser: User = { id: new Date().getTime(), ...user };
+    const users = await this.getUsers();
+    const newUser: User = {
+      ...user,
+      id: new Date().getTime()
+    };
     users.push(newUser);
-    return this._storage?.set(this.usersKey, users);
+    await this._storage?.set(this.userKey, users);
   }
 
-  async getUser(username: string, password: string): Promise<User | undefined> {
-    const users: User[] = await this._storage?.get(this.usersKey) || [];
-    return users.find((user: User) => user.username === username && user.password === password);
+  async getUsers(): Promise<User[]> {
+    return await this._storage?.get(this.userKey) ?? [];
   }
 
-  async saverecipe(recipe: any[]) {
-    await this._storage?.set('recipes', recipe);
+  async getUser(username: string, password: string): Promise<User | null> {
+    const users = await this.getUsers();
+    return users.find(user => user.username === username && user.password === password) || null;
   }
 
-  async getrecipe(): Promise<any[]> {
-    return await this._storage?.get('recipes') ?? [];
+  async addRecipe(userId: number, recipe: Omit<Recipe, 'id' | 'userId'>) {
+    const recipes = await this.getRecipes();
+    const newRecipe: Recipe = {
+      ...recipe,
+      id: new Date().getTime(),
+      userId
+    };
+    recipes.push(newRecipe);
+    await this._storage?.set(this.recipeKey, recipes);
   }
 
-  async addrecipe(newrecipe: any) {
-    const recipe = await this.getrecipe();
-    recipe.push(newrecipe);
-    await this.saverecipe(recipe);
+  async getRecipes(): Promise<Recipe[]> {
+    return await this._storage?.get(this.recipeKey) ?? [];
+  }
+
+  async getRecipesByUser(userId: number): Promise<Recipe[]> {
+    const recipes = await this.getRecipes();
+    return recipes.filter(recipe => recipe.userId === userId);
+  }
+
+  async saveRecipes(recipes: Recipe[]) {
+    await this._storage?.set(this.recipeKey, recipes);
+  }
+
+  async setLoggedInUser(username: string, password: string) {
+    await this._storage?.set('loggedInUsername', username);
+    await this._storage?.set('loggedInPassword', password);
+  }
+
+  async updateUser(updatedUser: User) {
+    const users = await this.getUsers();
+    const userIndex = users.findIndex(user => user.id === updatedUser.id);
+    if (userIndex !== -1) {
+      users[userIndex] = updatedUser;
+      await this._storage?.set(this.userKey, users);
+    }
+  }
+
+  async logout() {
+    await this._storage?.remove('loggedInUsername');
+    await this._storage?.remove('loggedInPassword');
+  }
+
+  async getUserFromSession() {
+    const username = await this._storage?.get('loggedInUsername');
+    const password = await this._storage?.get('loggedInPassword');
+    return this.getUser(username, password);
   }
 }

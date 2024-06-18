@@ -9,38 +9,52 @@ import { MyServicioService } from '../myservicio.service';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage implements OnInit {
-  registroForm: FormGroup;
+  registerForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private myServicioService: MyServicioService,
-    private router: Router
+    private router: Router,
+    private myServicio: MyServicioService
   ) {
-    this.registroForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      birthDate: ['', Validators.required],
-      username: [
-        '',
-        [Validators.required, Validators.pattern('[a-zA-Z0-9]*'), Validators.minLength(3), Validators.maxLength(8)],
-      ],
-      password: ['', [Validators.required, Validators.pattern('^[0-9]{4}$')]],
-      confirmPassword: ['', Validators.required]
-    }, { validator: this.checkPasswords });
+    this.registerForm = this.fb.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      birthDate: ['', [Validators.required]],
+      username: ['', [
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9]+$'),
+        Validators.minLength(3),
+        Validators.maxLength(8)
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.pattern('^[0-9]{4}$')
+      ]],
+      confirmPassword: ['', [Validators.required]]
+    }, {
+      validator: this.passwordMatchValidator
+    });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  checkPasswords(group: FormGroup) {
-    const password = group.get('password')?.value;
-    const confirmPassword = group.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { notSame: true };
+  passwordMatchValidator(form: FormGroup) {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    if (password !== confirmPassword) {
+      form.get('confirmPassword')?.setErrors({ mismatch: true });
+      return { mismatch: true };
+    } else {
+      form.get('confirmPassword')?.setErrors(null);
+      return null;
+    }
   }
 
-  async register() {
-    if (this.registroForm.valid) {
-      const user = this.registroForm.value;
-      await this.myServicioService.addUser(user);
+  async onSubmit() {
+    if (this.registerForm.valid) {
+      const user = this.registerForm.value;
+      delete user.confirmPassword;
+      await this.myServicio.addUser(user);
       this.router.navigate(['/login']);
     }
   }
