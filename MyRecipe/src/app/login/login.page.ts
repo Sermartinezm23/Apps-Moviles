@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
 import { MyServicioService } from '../myservicio.service';
 
 @Component({
@@ -8,50 +8,27 @@ import { MyServicioService } from '../myservicio.service';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   loginForm: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder, 
-    private navCtrl: NavController,
+    private fb: FormBuilder,
+    private router: Router,
     private myServicio: MyServicioService
   ) {
-    this.loginForm = this.formBuilder.group({
-      username: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('^[a-zA-Z0-9]+$'),
-          Validators.minLength(3),
-          Validators.maxLength(8),
-        ],
-      ],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('^[0-9]{4}$')
-        ],
-      ],
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
   }
 
-  ngOnInit() {}
-
-  onSubmit() {
-    if (this.loginForm.valid) {
-      const usernameControl = this.loginForm.get('username');
-      if (usernameControl) {
-        const username = usernameControl.value;
-        this.myServicio.setUsername(username);
-        this.navCtrl.navigateForward('/tabs/mis-recetas');
-      }
+  async onSubmit() {
+    const { username, password } = this.loginForm.value;
+    const user = await this.myServicio.getUser(username, password);
+    if (user) {
+      this.router.navigate(['/home']);
     } else {
-      console.log('Invalid form');
+      console.log('Usuario o contraseña incorrectos');
     }
-  }
-
-  login() {
-    console.log('Login button clicked');
   }
 }

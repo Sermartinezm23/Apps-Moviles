@@ -7,11 +7,10 @@ import { MyServicioService } from '../myservicio.service';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
-  username: string = '';
+  username: string = 'Desconocido';
 
-  constructor(private myServicio: MyServicioService) {}
+  constructor(private myServicio: MyServicioService) { }
 
   async ngOnInit() {
-    this.username = await this.myServicio.getUsername() ?? 'Desconocido';
   }
 }

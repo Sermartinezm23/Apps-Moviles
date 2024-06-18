@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
+import { User } from './models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MyServicioService {
   private _storage: Storage | null = null;
-  private usernameKey: string = 'username';
-  private recipeKey: string = 'recipe';
+  private usersKey: string = 'users';
 
   constructor(private storage: Storage) {
     this.init();
@@ -18,20 +18,24 @@ export class MyServicioService {
     this._storage = storage;
   }
 
-  setUsername(username: string) {
-    this._storage?.set(this.usernameKey, username);
+  async addUser(user: Omit<User, 'id'>) {
+    const users: User[] = await this._storage?.get(this.usersKey) || [];
+    const newUser: User = { id: new Date().getTime(), ...user };
+    users.push(newUser);
+    return this._storage?.set(this.usersKey, users);
   }
 
-  async getUsername(): Promise<string | null> {
-    return await this._storage?.get(this.usernameKey) ?? null;
+  async getUser(username: string, password: string): Promise<User | undefined> {
+    const users: User[] = await this._storage?.get(this.usersKey) || [];
+    return users.find((user: User) => user.username === username && user.password === password);
   }
 
   async saverecipe(recipe: any[]) {
-    await this._storage?.set(this.recipeKey, recipe);
+    await this._storage?.set('recipes', recipe);
   }
 
   async getrecipe(): Promise<any[]> {
-    return await this._storage?.get(this.recipeKey) ?? [];
+    return await this._storage?.get('recipes') ?? [];
   }
 
   async addrecipe(newrecipe: any) {
@@ -40,5 +44,3 @@ export class MyServicioService {
     await this.saverecipe(recipe);
   }
 }
-
-

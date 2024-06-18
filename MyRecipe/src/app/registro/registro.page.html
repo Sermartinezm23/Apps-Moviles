@@ -1,0 +1,73 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="title">MyRecipe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="false">
+  <div class="welcome">
+    <h4>Todas tus recetas en un solo lugar</h4>
+    <h3>Crea tu cuenta!</h3>
+  </div>
+
+  <form [formGroup]="registroForm" (ngSubmit)="register()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" formControlName="firstName" placeholder="Nombre"></ion-input>
+    </ion-item>
+    <div *ngIf="registroForm.get('firstName')?.touched && registroForm.get('firstName')?.invalid">
+      <p *ngIf="registroForm.get('firstName')?.errors?.['required']">El campo es obligatorio</p>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input type="text" formControlName="lastName" placeholder="Apellido"></ion-input>
+    </ion-item>
+    <div *ngIf="registroForm.get('lastName')?.touched && registroForm.get('lastName')?.invalid">
+      <p *ngIf="registroForm.get('lastName')?.errors?.['required']">El campo es obligatorio</p>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Fecha de Nacimiento</ion-label>
+      <ion-datetime formControlName="birthDate" displayFormat="DD-MM-YYYY" placeholder="Fecha de Nacimiento"></ion-datetime>
+    </ion-item>
+    <div *ngIf="registroForm.get('birthDate')?.touched && registroForm.get('birthDate')?.invalid">
+      <p *ngIf="registroForm.get('birthDate')?.errors?.['required']">El campo es obligatorio</p>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Nombre de Usuario</ion-label>
+      <ion-input type="text" formControlName="username" placeholder="Nombre de Usuario"></ion-input>
+    </ion-item>
+    <div *ngIf="registroForm.get('username')?.touched && registroForm.get('username')?.invalid">
+      <p *ngIf="registroForm.get('username')?.errors?.['required']">El campo es obligatorio</p>
+      <p *ngIf="registroForm.get('username')?.errors?.['pattern']">Debe ser alfanumérico</p>
+      <p *ngIf="registroForm.get('username')?.errors?.['minlength']">Debe tener al menos 3 caracteres</p>
+      <p *ngIf="registroForm.get('username')?.errors?.['maxlength']">No puede tener más de 8 caracteres</p>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+    </ion-item>
+    <div *ngIf="registroForm.get('password')?.touched && registroForm.get('password')?.invalid">
+      <p *ngIf="registroForm.get('password')?.errors?.['required']">El campo es obligatorio</p>
+      <p *ngIf="registroForm.get('password')?.errors?.['pattern']">Debe ser un número de 4 dígitos</p>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Confirmar Password</ion-label>
+      <ion-input type="password" formControlName="confirmPassword" placeholder="Confirmar Password"></ion-input>
+    </ion-item>
+    <div *ngIf="registroForm.get('confirmPassword')?.touched && registroForm.get('confirmPassword')?.invalid">
+      <p *ngIf="registroForm.get('confirmPassword')?.errors?.['required']">El campo es obligatorio</p>
+      <p *ngIf="registroForm.errors?.['notSame']">Las contraseñas no coinciden</p>
+    </div>
+
+    <ion-button expand="block" type="submit" [disabled]="registroForm.invalid">Crear Cuenta</ion-button>
+  </form>
+
+  <div class="create-account">
+    <a href="/login">Si ya tienes una cuenta, ingresa aquí</a>
+  </div>
+</ion-content>
