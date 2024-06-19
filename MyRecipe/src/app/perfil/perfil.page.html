@@ -16,19 +16,36 @@
       <img src="assets/R.png" alt="Foto de perfil">
     </ion-avatar>
     <h1>Perfil de {{ user.username }}</h1>
-    <p><strong>Nombre:</strong> <span *ngIf="!isEditing">{{ user.firstName }}</span>
-      <ion-input *ngIf="isEditing" [(ngModel)]="user.firstName"></ion-input>
-    </p>
-    <p><strong>Apellido:</strong> <span *ngIf="!isEditing">{{ user.lastName }}</span>
-      <ion-input *ngIf="isEditing" [(ngModel)]="user.lastName"></ion-input>
-    </p>
-    <p><strong>Fecha de Nacimiento:</strong> <span *ngIf="!isEditing">{{ user.birthDate }}</span>
-      <ion-input *ngIf="isEditing" [(ngModel)]="user.birthDate"></ion-input>
-    </p>
-    <ion-button expand="full" (click)="toggleEdit()">
-      {{ isEditing ? 'Cancelar' : 'Editar Perfil' }}
-    </ion-button>
-    <ion-button *ngIf="isEditing" expand="full" (click)="saveChanges()">Guardar Cambios</ion-button>
-    <ion-button expand="full" (click)="logout()">Cerrar Sesión</ion-button>
+    <div *ngIf="!isEditing">
+      <p><strong>Nombre:</strong> {{ user.firstName }}</p>
+      <p><strong>Apellido:</strong> {{ user.lastName }}</p>
+      <p><strong>Fecha de Nacimiento:</strong> {{ user.birthDate }}</p>
+      <ion-button expand="full" (click)="toggleEdit()">Editar Perfil</ion-button>
+    </div>
+
+    <div *ngIf="isEditing" class="edit-form">
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input [(ngModel)]="user.firstName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Apellido</ion-label>
+        <ion-input [(ngModel)]="user.lastName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Fecha de Nacimiento</ion-label>
+        <ion-input [(ngModel)]="user.birthDate" type="date"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Nombre de Usuario</ion-label>
+        <ion-input [(ngModel)]="user.username"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input [(ngModel)]="user.password" type="password"></ion-input>
+      </ion-item>
+      <ion-button expand="full" (click)="saveChanges()">Guardar Cambios</ion-button>
+    </div>
+    <ion-button expand="full" color="danger" (click)="logout()">Cerrar Sesión</ion-button>
   </div>
 </ion-content>

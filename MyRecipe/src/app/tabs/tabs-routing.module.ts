@@ -16,6 +16,14 @@ const routes: Routes = [
         loadChildren: () => import('../crear-receta/crear-receta.module').then(m => m.CrearRecetaPageModule)
       },
       {
+        path: 'recomendaciones',
+        loadChildren: () => import('../recomendaciones/recomendaciones.module').then(m => m.RecomendacionesPageModule)
+      },
+      {
+        path: 'donde-comprar',
+        loadChildren: () => import('../donde-comprar/donde-comprar.module').then(m => m.DondeComprarPageModule)
+      },
+      {
         path: 'perfil',
         loadChildren: () => import('../perfil/perfil.module').then(m => m.PerfilPageModule)
       },

@@ -16,7 +16,6 @@ export class PerfilPage implements OnInit {
     username: '',
     password: ''
   };
-  originalUser: any = {};
   isEditing: boolean = false;
 
   constructor(private myServicio: MyServicioService, private router: Router) {}
@@ -35,11 +34,6 @@ export class PerfilPage implements OnInit {
   }
 
   toggleEdit() {
-    if (this.isEditing) {
-      this.user = { ...this.originalUser };
-    } else {
-      this.originalUser = { ...this.user };
-    }
     this.isEditing = !this.isEditing;
   }
 
