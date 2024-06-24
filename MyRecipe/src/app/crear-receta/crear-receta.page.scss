@@ -1,34 +1,40 @@
-.title {
+ion-content {
+  --background: #f8f8f8;
   padding: 16px;
-  animation: fadeIn 1s ease-in-out;
+  overflow-y: auto;
+}
 
-  h2 {
-    font-size: 1.5em;
-    margin-bottom: 16px;
+  .title {
+    padding: 16px;
     animation: fadeIn 1s ease-in-out;
-  }
-}
 
-.create-recipe {
-  padding: 16px;
-  animation: fadeIn 1s ease-in-out;
-
-  ion-item {
-    margin-bottom: 16px;
-    animation: slideIn 1s ease-in-out;
+    h2 {
+      font-size: 1.5em;
+      margin-bottom: 16px;
+      animation: fadeIn 1s ease-in-out;
+    }
   }
 
-  .ingredients {
-    max-height: 60vh;
-    overflow-y: auto;
-    animation: slideIn 1s ease-in-out;
-  }
+  .create-recipe {
+    padding: 16px;
+    animation: fadeIn 1s ease-in-out;
 
-  ion-button {
-    margin-top: 24px;
-    animation: slideIn 1s ease-in-out;
+    ion-item {
+      margin-bottom: 16px;
+      animation: slideIn 1s ease-in-out;
+    }
+
+    .ingredients {
+      max-height: 60vh;
+      overflow-y: auto;
+      animation: slideIn 1s ease-in-out;
+    }
+
+    ion-button {
+      margin-top: 24px;
+      animation: slideIn 1s ease-in-out;
+    }
   }
-}
 
 @keyframes fadeIn {
   from {

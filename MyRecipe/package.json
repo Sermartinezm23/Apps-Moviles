@@ -23,6 +23,7 @@
     "@angular/router": "^17.0.2",
     "@capacitor/app": "6.0.0",
     "@capacitor/core": "6.0.0",
+    "@capacitor/geolocation": "^6.0.0",
     "@capacitor/haptics": "6.0.0",
     "@capacitor/keyboard": "6.0.0",
     "@capacitor/status-bar": "6.0.0",
@@ -30,8 +31,10 @@
     "@ionic/angular": "^8.0.0",
     "@ionic/storage": "^4.0.0",
     "@ionic/storage-angular": "^4.0.0",
+    "@types/leaflet": "^1.9.12",
     "cordova-sqlite-storage": "^6.1.0",
     "ionicons": "^7.0.0",
+    "leaflet": "^1.9.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
