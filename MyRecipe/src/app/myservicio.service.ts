@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 
-interface User {
+export interface User {
   id: number;
   firstName: string;
   lastName: string;

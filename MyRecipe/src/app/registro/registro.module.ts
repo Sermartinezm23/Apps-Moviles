@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -15,6 +15,7 @@ import { RegistroPage } from './registro.page';
     IonicModule,
     RegistroPageRoutingModule
   ],
-  declarations: [RegistroPage]
+  declarations: [RegistroPage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class RegistroPageModule {}
